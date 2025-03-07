@@ -3,6 +3,7 @@ import logging
 import os
 from RCA import RCA
 from TMI import TMI
+from ALFRD import ALFRD
 
 app = Flask(__name__)
 
@@ -22,6 +23,18 @@ def tmi_predictor(currentStatus):
 		return jsonify(result)
 
 	return jsonify("Not a proper request method or data")
+
+
+@app.route('/alfrd/<airportCode>/<date>/<hourOfDay>', methods=['GET', 'POST'])
+def alfrd_predictor(airportCode, date, hourOfDay):
+	if request.method=="GET":
+		result = ALFRD.predict_tmi(airportCode, date, hourOfDay, request)
+		return jsonify(result)
+
+	return jsonify("Not a proper request method or data")
+
+
+
 
 if __name__ == '__main__':
 	app.run(debug=True, host='0.0.0.0', port=5005, threaded=False)

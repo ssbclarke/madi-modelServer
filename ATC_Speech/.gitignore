@@ -1,0 +1,4 @@
+__pycache__
+input.wav
+whisper_model_taxi
+whisper_model_taxi/*

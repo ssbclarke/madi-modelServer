@@ -9,6 +9,6 @@ def predict_tmi(currentStatus, request):
 	except:
 		return "Error"
 	
-	return tmi_pred
+	return {"tmi_prediction": tmi_pred}
 
 	# print("returning: " + results['text'])
