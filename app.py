@@ -3,12 +3,9 @@ import logging
 import os
 from RCA import RCA
 from TMI import TMI
-<<<<<<< HEAD
 from ALFRD import ALFRD
-=======
 import spacy
 import NER
->>>>>>> 1fa0460fa108ed85dd98c5a681de331503258a2f
 
 app = Flask(__name__)
 
@@ -29,7 +26,6 @@ def tmi_predictor(currentStatus):
 
 	return jsonify("Not a proper request method or data")
 
-<<<<<<< HEAD
 
 @app.route('/alfrd/<airportCode>/<date>/<hourOfDay>', methods=['GET', 'POST'])
 def alfrd_predictor(airportCode, date, hourOfDay):
@@ -42,7 +38,6 @@ def alfrd_predictor(airportCode, date, hourOfDay):
 
 
 
-=======
 @app.route('/ner/<currentStatus>', methods=['GET', 'POST'])
 def ner_predict(currentStatus):
 	MODEL_PATH = os.path.join(NER.__path__[0], "model")
@@ -54,7 +49,6 @@ def ner_predict(currentStatus):
 
 	return jsonify("Not a proper request method or data")
 
->>>>>>> 1fa0460fa108ed85dd98c5a681de331503258a2f
 if __name__ == '__main__':
 	app.run(debug=True, host='0.0.0.0', port=5005, threaded=False)
 
