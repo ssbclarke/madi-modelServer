@@ -3,6 +3,8 @@ import logging
 import os
 from RCA import RCA
 from TMI import TMI
+import spacy
+import NER
 
 app = Flask(__name__)
 
@@ -20,6 +22,17 @@ def tmi_predictor(currentStatus):
 	if request.method=="GET":
 		result = TMI.predict_tmi(currentStatus, request)
 		return jsonify(result)
+
+	return jsonify("Not a proper request method or data")
+
+@app.route('/ner/<currentStatus>', methods=['GET', 'POST'])
+def ner_predict(currentStatus):
+	MODEL_PATH = os.path.join(NER.__path__[0], "model")
+	nlp = spacy.load(MODEL_PATH)
+	if request.method=="GET":
+		doc = nlp(currentStatus)
+		entities = [{"text": ent.text, "label": ent.label_} for ent in doc.ents]
+		return jsonify({"entities": entities})
 
 	return jsonify("Not a proper request method or data")
 
